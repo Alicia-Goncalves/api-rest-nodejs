@@ -18,6 +18,11 @@ app.get('/transactions/:id', async (request) => {
     return {transaction}
 })
 
+app.get('/transactions/summary', async () => {
+    const summary = await knexInstance('transactions').sum('amount', {as: 'amount'}).first()
+    return ('summary')
+})
+
 app.post ('/transactions', async(request,reply) => {
     const createTransactionsBodySchema = z.object ({
      title: z.string(),
