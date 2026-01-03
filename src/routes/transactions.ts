@@ -9,7 +9,7 @@ app.get ('/transactions', async () => {
     return { transactions }
 })
 
-app.get('/transactions/:id', async (request) => {
+app.get('/transactions/:id', async (request,reply) => {
     const getTransactionParamsSchema = z.object({
         id: z.string().uuid(),
     })
@@ -19,7 +19,7 @@ app.get('/transactions/:id', async (request) => {
 })
 
 app.get('/transactions/summary', async () => {
-    const summary = await knexInstance('transactions').sum('amount', {as: 'amount'}).first()
+    const summary = await knexInstance('transactions').sum('amount as amount').first()
     return ('summary')
 })
 
@@ -29,14 +29,26 @@ app.post ('/transactions', async(request,reply) => {
      amount: z.number(),
      type: z.enum(['credit', 'debit']),  
     })
+
 const {title, amount, type} = createTransactionsBodySchema.parse (
     request.body,
 )
+
+let sessionId = request.cookies.sessionId
+if (!sessionId){
+    sessionId = randomUUID()
+
+reply.cookie('sessionId', sessionId, {
+    path:'/',
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+})
+}
 
 await knexInstance('transactions').insert({
     id: randomUUID(),
     title,
     amount: type == 'credit' ? amount : amount * -1,
+    session_id: sessionId,
 })
 return reply.status(201).send()
 })
