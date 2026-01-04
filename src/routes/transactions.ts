@@ -5,7 +5,6 @@ import { knexInstance } from '../database'
 import { checkSessionIdExists } from '../middlewares/check-session-id-exists'
 
 export async function transactionsRoutes(app: FastifyInstance){
-
 app.get ('/transactions', {
     preHandler: [checkSessionIdExists],
 } ,async (request,reply) => {
@@ -41,9 +40,13 @@ app.get('/transactions/summary', {
     const { sessionId }= request.cookies
     const summary = await knexInstance('transactions')
     .where('session_id', sessionId)
-    .sum('amount as amount')
+    .sum('amount', {as: 'amount'})
     .first()
-    return (summary)
+    return {
+      summary: {
+        amount: summary?.amount ?? 0,
+      },
+    }
 })
 
 app.post ('/transactions',async(request,reply) => {
