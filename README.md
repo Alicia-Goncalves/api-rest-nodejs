@@ -32,6 +32,6 @@ Essa API permite:
 ---
 
 ## Requisitos Antes de rodar a API, instale as dependências:
-bash
-npm install
+- bash
+- npm install
 
