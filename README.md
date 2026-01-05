@@ -31,5 +31,7 @@ Essa API permite:
 
 ---
 
-## Estrutura do projeto
+## Requisitos Antes de rodar a API, instale as dependências:
+bash
+npm install
 
