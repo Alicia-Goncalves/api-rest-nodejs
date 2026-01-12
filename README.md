@@ -1,37 +1,35 @@
-# API REST Node.js – Transactions
+# Node.js REST API – Transactions
 
-Uma **API REST completa** construída com **Node.js**, **Fastify**, **Knex** e **SQLite**, com autenticação via cookies e **testes end-to-end automatizados**.
+A **fully-featured REST API** built with **Node.js**, **Fastify**, **Knex**, and **SQLite**, featuring **cookie-based authentication** and **automated end-to-end tests**.
 
-Essa API permite:
-- criar transações (crédito e débito)
-- listar transações
-- buscar transações por ID
-- calcular o resumo de transações por sessão
+This API allows you to:
+- create transactions (credit and debit)
+- list all transactions
+- retrieve transactions by ID
+- calculate a session-based transaction summary
 
 ---
 
-## Tecnologias utilizadas
+## Technologies Used
 
-**Backend**
+### Backend
 - Node.js  
 - TypeScript  
 - Fastify  
 - Knex.js  
-- SQLite
+- SQLite  
 
-**Validação e testes**
+### Validation & Testing
 - Zod  
 - Vitest  
 - Supertest  
-- child_process para migrações nos testes
+- `child_process` for running migrations during tests  
 
-**Ferramentas**
+### Tools
 - Dotenv  
-- Cookies para gerenciamento de sessão
-
----
+- Cookies for session management  
 
 ## Requisitos Antes de rodar a API, instale as dependências:
-bash
-npm install
+- bash
+- npm install
 
